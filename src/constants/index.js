@@ -193,9 +193,23 @@ export const PLAY_BUTTON_CONFIG = {
 
 // Stepper
 
+export const STEPPER_LABEL_CONFIG = {
+  text: "Stake",
+  x: 495,
+  y: 890,
+  width: 120,
+  height: 60,
+  style: new PIXI.TextStyle({
+    fontSize: 36,
+    fill: "#f3b15d",
+    align: "center",
+    fontWeight: "bold",
+  }),
+};
+
 export const STEPPER_CONFIG = {
   x: 260,
-  y: 320,
+  y: 350,
   width: 630,
   height: 160,
   rightArrowX: 210,
@@ -228,9 +242,15 @@ export const STEPPER_CONFIG = {
 
 export const BALANCE_LABEL_CONFIG = {
   x: 960,
-  y: 40,
+  y: 39,
   width: 300,
-  height: 70,
+  height: 96,
+  textConfig: {
+    x: 0,
+    y: 7,
+    width: 100,
+    height: 25,
+  },
 };
 
 // Win Panel

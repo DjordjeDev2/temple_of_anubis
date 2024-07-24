@@ -3,7 +3,14 @@ import * as PIXI from "pixi.js";
 
 import LABEL_BACKGROUND from "../../assets/BalanceBox.png"; // Import your background image
 
-const LabelComponent = ({ text, x = 0, y = 0, width = 200, height = 100 }) => {
+const LabelComponent = ({
+  text,
+  x = 0,
+  y = 0,
+  width = 200,
+  height = 100,
+  textConfig,
+}) => {
   return (
     <Container x={x} y={y} width={width} height={height}>
       {/* Background Sprite */}
@@ -18,9 +25,10 @@ const LabelComponent = ({ text, x = 0, y = 0, width = 200, height = 100 }) => {
       {/* Text Label */}
       <Text
         text={`${text}$`}
-        x={0}
-        y={3}
-        height={height / 2}
+        x={textConfig.x}
+        y={textConfig.y}
+        height={textConfig.height}
+        width={textConfig.width}
         anchor={0.5}
         style={
           new PIXI.TextStyle({

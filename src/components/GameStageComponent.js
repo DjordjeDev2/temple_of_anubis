@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import { Sprite } from "react-pixi-fiber/index.js";
+import { Sprite, Text } from "react-pixi-fiber/index.js";
 import ReelHolderComponent from "./reels/ReelHolderComponent";
 import { Stage } from "react-pixi-fiber/index.js";
 import SpriteButtonComponent from "./controls/SpriteButtonComponent";
@@ -194,8 +194,20 @@ function GameStageComponent() {
           y={Constants.BALANCE_LABEL_CONFIG.y}
           width={Constants.BALANCE_LABEL_CONFIG.width}
           height={Constants.BALANCE_LABEL_CONFIG.height}
+          textConfig={Constants.BALANCE_LABEL_CONFIG.textConfig}
           text={labelBalance}
         ></LabelComponent>
+
+        {/* Stake Label */}
+        <Text
+          text={Constants.STEPPER_LABEL_CONFIG.text}
+          x={Constants.STEPPER_LABEL_CONFIG.x}
+          y={Constants.STEPPER_LABEL_CONFIG.y}
+          height={Constants.STEPPER_LABEL_CONFIG.height}
+          width={Constants.STEPPER_LABEL_CONFIG.width}
+          anchor={0.5}
+          style={Constants.STEPPER_LABEL_CONFIG.style}
+        />
 
         {/* Stake Stepper */}
         <StepperComponent
