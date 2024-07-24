@@ -61,10 +61,6 @@ function GameStageComponent() {
   // Spin button click event.
   const placeBetEvent = () => {
     if (gameStage === STAGE_NEW_GAME) {
-      console.log("CALLED!");
-      console.log("CALLED!");
-      console.log("CALLED!");
-      console.log("CALLED!");
       dispatch(gameStageActions.placeBetStage());
     }
   };
