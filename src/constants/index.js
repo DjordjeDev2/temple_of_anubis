@@ -277,6 +277,24 @@ export const DIALOG_BOX_CONFIG = {
 
 // Animation
 
+export const REEL_SPRING_START_CONFIG = {
+  startVal: 0,
+  endVal: -100,
+  easeOne: "power1.out",
+  easeTwo: "power1.in",
+  durationOne: 0.5,
+  durationTwo: 0.17,
+};
+
+export const REEL_END_HIT_CONFIG = {
+  startVal: 0,
+  endVal: -50,
+  easeOne: "",
+  easeTwo: "elastic.out(1,0.3)",
+  durationOne: 0.1,
+  durationTwo: 1.5,
+};
+
 export const WIN_PANEL_DISPLAY_MOMENT_SEC = 1.3;
 
 // Settlement win time in seconds

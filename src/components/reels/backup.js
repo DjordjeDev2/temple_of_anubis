@@ -9,7 +9,7 @@ import { twoPointT, statesUpdate } from "../../utils/TweenUtil";
 import {
   STAGE_BET_RUNNING,
   STAGE_SETTLEMENT,
-} from "../../store/slices/gameStage";
+} from "./../../store/slices/gameStage";
 
 import * as Constants from "../../constants";
 import PaylineComponent from "./PaylineComponent";
@@ -30,8 +30,6 @@ const INITIAL_REEL_RESULTS = Array(Constants.REEL_ROWS_TOTAL).fill(
 function ReelHolderComponent(props) {
   const [iconResult, setIconResult] = useState(INITIAL_REEL_RESULTS);
   const [reelHolderPosY, setReelHolderY] = useState(INITIAL_REEL_STATE);
-
-  const animationRunning = useRef(false);
 
   // Handles game stages.
   const gameStage = useSelector((state) => state.gameStage.stage);
@@ -143,12 +141,6 @@ function ReelHolderComponent(props) {
       return;
     }
 
-    if (animationRunning.current) {
-      return;
-    }
-
-    animationRunning.current = true;
-
     // Cleanup our ticker.
     cleanUpTicker();
 
@@ -183,14 +175,16 @@ function ReelHolderComponent(props) {
       )
       // Animation has ended, execute callback.
       .then(() => {
-        animationRunning.current = false;
         props.callback();
       });
 
     // Start current animation.
     ticker.current.start();
 
-    return () => {};
+    // Cleanup.
+    return () => {
+      cleanUpTicker();
+    };
   }, [gameStage, handleReelLoop, props, cleanUpTicker]);
 
   return (
