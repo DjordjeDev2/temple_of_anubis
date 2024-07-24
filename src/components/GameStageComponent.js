@@ -10,7 +10,7 @@ import store from "../store";
 import SoundUtils from "../utils/SoundUtils";
 import { gameStateActions } from "../store/slices/gameState";
 import bankManagerInstance from "../bank/BankManager";
-import { valueReturnTween } from "../utils/TweenUtil";
+import { valueReturnTween, valueTween } from "../utils/TweenUtil";
 import {
   gameStageActions,
   STAGE_LOAD,
@@ -35,9 +35,12 @@ function GameStageComponent() {
     Constants.INITIAL_GAME_STATE.balance
   );
 
-  // Win screen scale state.
+  // Win screen scale state used for animation.
   const [winScreenScale, setWinScreenScale] = useState(0.0);
 
+  const [winScreenLabel, setWinScreenLabel] = useState("");
+
+  // Error message state.
   const [errorMessage, setErrorMessage] = useState({ visible: false, msg: "" });
 
   // Get dispatcher.
@@ -62,13 +65,19 @@ function GameStageComponent() {
     }
   };
 
+  // Once reel animations are over
+  // we go into settlement stage.
+  const animationOver = () => {
+    dispatch(gameStageActions.settlementStage());
+  };
+
   // Game has started event.
   const startGameEvent = () => {
     SoundUtils.play(Constants.BG_ASSETS.bgMusic, true, 0.6);
     dispatch(gameStageActions.newGameStage());
   };
 
-  // Steper event dispatch.
+  // Stepper event dispatch.
   const stepperUpdateEvent = (val) => {
     dispatch(gameStateActions.setStake(val));
   };
@@ -125,11 +134,16 @@ function GameStageComponent() {
               "power1.out",
               "power1.out",
               2.0,
-              0.2,
+              0.7,
               (value) => {
+                // Set win screen scale value.
                 setWinScreenScale(value);
               }
             );
+
+            valueTween(0.0, 1.0, 1.4, "power1.out", (value) => {
+              setWinScreenLabel(Math.ceil(gameState.wa * value));
+            });
           }, Constants.WIN_PANEL_DISPLAY_MOMENT_SEC * 1000);
         }
         // Settlement break.
@@ -167,7 +181,7 @@ function GameStageComponent() {
 
         {/* Reels */}
         <Provider store={store}>
-          <ReelHolderComponent />
+          <ReelHolderComponent callback={animationOver} />
         </Provider>
 
         {/* Balance Label */}
@@ -204,7 +218,7 @@ function GameStageComponent() {
           height={Constants.WIN_PANEL_CONFIG.height}
           image={Constants.WIN_PANEL_CONFIG.image}
           textConfig={Constants.WIN_PANEL_CONFIG.textConfig}
-          text={`${gameState.wa}$`}
+          text={`${winScreenLabel}$`}
           visible={true}
         ></PanelComponent>
 

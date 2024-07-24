@@ -33,6 +33,11 @@ class BankManager {
 
     return placebetRequest;
   }
+
+  // Gets result for external reels.
+  getRandomReelDestribution() {
+    return this.resultGenerator.generateResult();
+  }
 }
 
 export const bankManagerInstance = new BankManager();

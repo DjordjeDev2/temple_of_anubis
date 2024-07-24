@@ -194,10 +194,10 @@ export const PLAY_BUTTON_CONFIG = {
 // Stepper
 
 export const STEPPER_CONFIG = {
-  x: 300,
-  y: 550,
-  width: 370,
-  height: 90,
+  x: 260,
+  y: 320,
+  width: 630,
+  height: 160,
   rightArrowX: 210,
   leftArrowX: -10,
   arrowY: 200,
@@ -213,8 +213,9 @@ export const STEPPER_CONFIG = {
   labelConfig: {
     x: 100,
     y: 200,
+    width: 70,
+    height: 30,
   },
-
   style: new PIXI.TextStyle({
     fontSize: 36,
     fill: "#00000",

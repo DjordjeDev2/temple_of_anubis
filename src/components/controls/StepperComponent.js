@@ -89,8 +89,10 @@ const StepperComponent = ({
         text={`${valueRef.current}$`}
         x={STEPPER_CONFIG.labelConfig.x}
         y={STEPPER_CONFIG.labelConfig.y}
+        width={STEPPER_CONFIG.labelConfig.width}
+        height={STEPPER_CONFIG.labelConfig.height}
         anchor={0.5}
-        style={STEPPER_CONFIG.labelConfig.style}
+        style={STEPPER_CONFIG.style}
       />
       <Sprite
         texture={PIXI.Texture.from(STEPPER_CONFIG.downTex)}
